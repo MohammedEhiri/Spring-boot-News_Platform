@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333333;
+      text-align: center;
+    }
+    h2 {
+      color: #444444;
+      margin-top: 20px;
+    }
+    form {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #555555;
+    }
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .error-message {
+      color: #d9534f;
+      margin-top: 10px;
+    }
+  </style>
+  <title>Création de compte</title>
+</head>
+<body>
+<div class="container">
+  <h2>Création de compte</h2>
+  <form action="/user/sign-up" method="post">
+    <label for="nom">Nom:</label>
+    <input type="text" name="nom" required="required">
+    <label for="prenom">Prénom:</label>
+    <input type="text" name="prenom" required="required">
+    <label for="nom">Login:</label>
+    <input type="text" name="login" required="required">
+    <label for="about">About:</label>
+    <textarea name="about" required="required"></textarea>
+    <label for="nom">Password:</label>
+    <input type="password" name="password" required="required">
+    <input type="submit" value="Créer un compte">
+  </form>
+</div>
+</body>
+</html>

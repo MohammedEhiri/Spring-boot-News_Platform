@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<<html lang="en" xmlns:th="http://www.thymeleaf.org">
+>
+<head>
+    <title>Mongodb_Projet</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
+
+
+
+
+
+    <style type="text/css">
+        .left-sidebar, .right-sidebar , .card {
+            flex-basis: 20%;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            position: sticky;
+            top: 30px;
+            overflow-y: auto;
+            height: 100vh;
+            padding: 20px;
+            color: #999;
+            position: sticky;
+            height: 100vh;
+            overflow-y: auto;
+
+
+
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin:30px;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #fff;
+            color:#999;
+            letter-spacing:-0.2px;
+
+
+        }
+
+
+        h1, h2, h3 {
+            font-weight: 600;
+            color: #000;
+        }
+        h5{
+            padding: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            border-radius:2%;
+            padding: 10px;
+            color:#999;
+        }
+
+        strong {
+            color: #000;
+            font-weight: 900;
+        }
+
+        form {
+            display: inline;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+            border-radius: 10px;
+            color: #fff;
+            opacity: 1;
+        }
+
+        input[type="submit"] {
+            padding: 5px 10px;
+            color: #fff;
+            font-weight : 200;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+
+        }
+        button[type="submit"] {
+            padding: 5px 10px;
+            color: #f9f9f9;
+            background-color:#000;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+        }
+
+        button:hover {
+        }
+
+        ul.comments {
+            margin-top: 10px;
+            padding-left: 20px;
+            list-style-type: square;
+        }
+
+        ul.comments li {
+            margin-bottom: 5px;
+        }
+
+
+        .sticky-left-sidebar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+
+
+        .news-image {
+            width: 100%;
+            height: 100%;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .news-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .card  {
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            color:#555;
+            background-color: #fff;
+
+            font-weight: bold;
+
+
+        }
+        .card-text{
+            font-size: 12px;
+
+        }
+        .card img{
+            border-radius: 10px;
+            overflow: hidden;
+            border-radius: 10px;
+            width: 100%;
+            height: 300px;
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+
+        }
+
+
+        .title {
+            font-family: "Arial", sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .description,
+        .added-by,
+        .date {
+            font-family: "Arial", sans-serif;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .added-by {
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #666;
+        }
+
+
+
+        .sidebar {
+            color: #555;
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            font-weight: bold;
+
+
+
+        }
+
+        .sidebar h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            background-color:#eee;
+            color: #777;
+            margin-bottom: 10px;
+            font-size: 14px;
+            box-shadow: 0px 0px 8px rgba(254, 254, 254, 0.2);
+            border-radius: 10px;
+
+
+        }
+
+        .sidebar li strong {
+            color: #333;
+        }
+
+
+        .user-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user {
+
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+
+        }
+
+        .user img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-info h5 {
+            font-size: 14px;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        .user-info p {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f5f5f5;
+
+
+        .sticky-left-sidebar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+
+        .btn-show-comments {
+            margin-top: 20px;
+        }
+
+        .modal-content {
+            border-radius: 6px;
+
+            background-color: #f9f9f9;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            background-color: #111;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            color: #fff;
+        }
+
+        .comment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .comment-author {
+            font-weight: bold;
+        }
+
+        .comment-text {
+            margin-top: 5px;
+        }
+
+        .likes{
+            color: blue;
+            font-weight: bold;
+        }
+
+        .dislikes{
+            color: #000 ;
+            font-weight: bold;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+
+
+
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        <div class="col-2 sidebar">
+
+
+            <div class="user-list">
+
+            </div>
+        </div>
+
+
+
+        <div class="col-8 d-flex flex-column ">
+            <div class="addNews">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 4vh;">
+                    <div class="text-center w-100">
+                        <form action="/news/add-news" method="post">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="url" placeholder="coller le URL ici...">
+                                <div class="input-group-append">
+                                    <button class="btn" type="submit">Ajouter news</button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="addedBy" value="${loggedInUser.id}">
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+            <br>
+            <h1>Actualitées récentes </h1><br>
+
+            <div>
+            <div th:each="news : ${news}" class="card mb-3">
+                <div class="card-body">
+                    <h1 class="card-title" th:text="${news.title}"></h1>
+                    <strong>Description:</strong>
+                    <h6>
+                        <span th:text="${news.description}"></span>
+                        <a th:href="@{${news.url}}" target="_blank">En savoir plus</a>
+                    </h6>
+                    <br>
+                    <p><img th:src="${news.imageUrl}" class="news-image"></p><br>
+                </div>
+            </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-2 sidebar">
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    function updateModalContent(newsId) {
+        // Obtenez les commentaires de la news spécifique à partir de votre source de données (par exemple, en utilisant Ajax)
+        // Pour cet exemple, nous utilisons des commentaires fictifs sous forme de tableau
+        const comments = [
+            "Commentaire 1 pour la news " + newsId,
+            "Commentaire 2 pour la news " + newsId,
+        ];
+
+        const modal = $("#commentsModal-" + newsId);
+
+        const modalBody = modal.find(".modal-body");
+        modalBody.empty();
+        comments.forEach(comment => {
+            modalBody.append("<p>" + comment + "</p>");
+        });
+    }
+
+    $(".btn-primary").on("click", function() {
+        const newsId = $(this).data("news-id");
+        updateModalContent(newsId);
+    });
+</script>
+
+</body>
+</html>
